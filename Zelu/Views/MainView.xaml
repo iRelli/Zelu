@@ -1,0 +1,160 @@
+﻿<Window
+    x:Class="Zelu.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Zelu.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="clr-namespace:Zelu.UC"
+    xmlns:viewModel="clr-namespace:Zelu.ViewModel"
+    Title="Zelu"
+    Width="1280"
+    Height="720"
+    AllowsTransparency="True"
+    Background="{x:Null}"
+    Icon="/Assets/Material-RocketLaunch.png"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:DashViewModel}">
+            <uc:ucDashboard />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:HubViewModel}">
+            <uc:ucHub />
+        </DataTemplate>
+    </Window.Resources>
+    <Border
+        Padding="20"
+        Background="#131725"
+        CornerRadius="25"
+        MouseDown="Border_MouseDown">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border Background="#1d2335" CornerRadius="25">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" Opacity="0.3" />
+                </Border.Effect>
+                <StackPanel>
+                    <StackPanel
+                        Margin="0,30,0,10"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Grid>
+                            <Border
+                                Width="35"
+                                Height="35"
+                                Background="#ffffff"
+                                CornerRadius="50" />
+                            <Border
+                                Width="35"
+                                Height="35"
+                                BorderBrush="#ffffff"
+                                BorderThickness="3"
+                                CornerRadius="50">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="10" Opacity="0.3" />
+                                </Border.Effect>
+                                <Icon:PackIconMaterial
+                                    Width="15"
+                                    Height="15"
+                                    Margin="3,0,0,2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Foreground="#424751"
+                                    Kind="RobotAngry">
+                                    <Icon:PackIconMaterial.LayoutTransform>
+                                        <RotateTransform Angle="45" />
+                                    </Icon:PackIconMaterial.LayoutTransform>
+                                </Icon:PackIconMaterial>
+                            </Border>
+                        </Grid>
+                        <TextBlock
+                            Margin="10,0,0,3"
+                            FontSize="30"
+                            Foreground="#ffffff"
+                            Text="Zelu">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="10" Opacity="0.3" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource menuTitle}" Text="Main" />
+                    <RadioButton
+                        Command="{Binding DashboardCommand}"
+                        IsChecked="True"
+                        Style="{StaticResource menuButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <Icon:PackIconMaterial Kind="Home" Style="{StaticResource menuButtonIcon}" />
+                            <TextBlock Style="{StaticResource menuButtonText}" Text="Dashboard" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Command="{Binding HubCommand}" Style="{StaticResource menuButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <Icon:PackIconMaterial Kind="Hubspot" Style="{StaticResource menuButtonIcon}" />
+                            <TextBlock Style="{StaticResource menuButtonText}" Text="Hub" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Command="{Binding ToolCommand}" Style="{StaticResource menuButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <Icon:PackIconMaterial Kind="Tools" Style="{StaticResource menuButtonIcon}" />
+                            <TextBlock Style="{StaticResource menuButtonText}" Text="Tools" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <TextBlock Style="{StaticResource menuTitle}" Text="Help" />
+
+                    <RadioButton Command="{Binding SettingsCommand}" Style="{StaticResource menuButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <Icon:PackIconMaterial Kind="CogOutline" Style="{StaticResource menuButtonIcon}" />
+                            <TextBlock Style="{StaticResource menuButtonText}" Text="Settings" />
+                        </StackPanel>
+                    </RadioButton>
+                </StackPanel>
+            </Border>
+
+            <ContentPresenter
+                x:Name="ContentPresenter"
+                Grid.Column="1"
+                Content="{Binding CurrentChildView}" />
+            <Button
+                Grid.Column="1"
+                Width="40"
+                Height="40"
+                Margin="978,-19,2,659"
+                Padding="0,4,0,4"
+                materialDesign:ButtonAssist.CornerRadius="30"
+                Click="Button_Click"
+                Content="{materialDesign:PackIcon Kind=Close,
+                                                  Size=19}"
+                Foreground="Gray"
+                Style="{StaticResource MaterialDesignFlatButton}" />
+            <Button
+                x:Name="btnMinimize"
+                Grid.Column="1"
+                Width="40"
+                Height="40"
+                Margin="945,-19,35,659"
+                Padding="0,4,0,4"
+                materialDesign:ButtonAssist.CornerRadius="30"
+                Click="btnMinimize_Click"
+                Content="{materialDesign:PackIcon Kind=WindowMinimize,
+                                                  Size=19}"
+                Foreground="Gray"
+                Style="{StaticResource MaterialDesignFlatButton}" />
+        </Grid>
+    </Border>
+</Window>
