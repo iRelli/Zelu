@@ -43,8 +43,11 @@ namespace Zelu.Classes
                 File.WriteAllText(file, JsonConvert.SerializeObject(ListTest, Formatting.Indented));
 
                 string json = JsonConvert.SerializeObject(ListTest, Formatting.Indented);
+                ListTest = JsonConvert.DeserializeObject<List<Log>>(File.ReadAllText(file));
                 ListTest.Add(p1);
-                File.WriteAllText(file, json);
+                var json1 = JsonConvert.SerializeObject(ListTest, Formatting.Indented);
+
+                File.WriteAllText(file, json1);
 
             }
             else

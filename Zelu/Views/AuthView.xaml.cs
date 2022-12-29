@@ -43,7 +43,7 @@ namespace Zelu.Views
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            
+            btnLogin.IsEnabled = false;   
             var loginResponse = await App.Login(tbUsername.Text, tbPassword.Password, "", true, false);
             if (loginResponse.Error == false)
             {
